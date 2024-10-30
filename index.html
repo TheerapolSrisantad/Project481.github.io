@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟอร์มขอใช้บริการห้อง SR (Study Room)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>ฟอร์มขอใช้บริการห้อง SR (Study Room)</h1>
+
+<form action="https://sheetdb.io/api/v1/9xfxpbcp0lt0n" method="post" id="study-room-form">
+    <label for="name">ชื่อ - นามสกุล:</label>
+    <input type="text" id="name" name="name" placeholder="กรอกชื่อ-นามสกุล" required>
+
+    <label for="S_ID">รหัสนักศึกษา:</label>
+    <input type="text" id="S_ID" name="S_ID" placeholder="กรอกรหัสนักศึกษา" required>
+
+    <label for="faculty">คณะ:</label>
+    <input type="text" id="faculty" name="faculty" placeholder="กรอกชื่อคณะ" required>
+
+    <label for="subject">ภาควิชา:</label>
+    <input type="text" id="subject" name="subject" placeholder="กรอกชื่อภาควิชา" required>
+
+    <label for="year">ชั้นปี:</label>
+    <input type="text" id="year" name="year" placeholder="กรอกชั้นปี" required>
+
+    <label>ระดับการศึกษา:</label>
+    <div class="radio-group">
+        <label><input type="radio" name="study_level" value="ตรี" required> ปริญญาตรี</label>
+        <label><input type="radio" name="study_level" value="โท"> ปริญญาโท</label>
+        <label><input type="radio" name="study_level" value="เอก"> ปริญญาเอก</label>
+        <label><input type="radio" name="study_level" value="อาจารย์"> อาจารย์</label>
+        <label><input type="radio" name="study_level" value="บุคลากร"> บุคลากร</label>
+    </div>
+
+    <label>ขอใช้บริการห้อง:</label>
+    <div class="radio-group">
+        <label><input type="radio" name="room" value="SR1" required> SR 1 + ไวท์บอร์ด (ไม่เกิน 10 คน)</label>
+        <label><input type="radio" name="room" value="SR2"> SR 2 + ไวท์บอร์ด (ไม่เกิน 10 คน)</label>
+        <label><input type="radio" name="room" value="SR3"> SR 3 + ไวท์บอร์ด (ไม่เกิน 6 คน)</label>
+        <label><input type="radio" name="room" value="SR4"> SR 4 + ไวท์บอร์ด (ไม่เกิน 6 คน)</label>
+    </div>
+
+    <label>รอบใช้บริการ:</label>
+    <div class="radio-group">
+        <label><input type="radio" name="time" value="3hr" required> รอบ 3 ชั่วโมง</label>
+        <label><input type="radio" name="time" value="extension"> ขอต่อกรณีไม่มีผู้ใช้อื่น</label>
+    </div>
+
+    <label>ขอใช้ห้องเพื่อ:</label>
+    <div class="radio-group">
+        <label><input type="radio" name="objective" value="โครงการ" required> นำเสนอโครงการ</label>
+        <label><input type="radio" name="objective" value="ประชุมกลุ่ม"> ประชุมกลุ่ม</label>
+        <label><input type="radio" name="objective" value="ติว"> ติว (โปรดระบุชื่อวิชา)</label>
+        <label><input type="radio" name="objective" value="อื่นๆ"> อื่นๆ (โปรดระบุ)</label>
+        <input type="text" placeholder="ระบุจุดประสงค์เพิ่มเติม (ถ้ามี)" name="more">
+    </div>
+
+    <label>รายชื่อผู้ใช้บริการห้อง SR:</label>
+    <textarea name="users" rows="5" style="width: 100%;" placeholder="กรอกรหัสประจำตัว / คณะ / รายชื่อผู้ใช้บริการห้อง" required></textarea>
+
+    <h2>ระเบียบการใช้บริการห้อง SR</h2>
+    <ul>
+        <li>จำนวนผู้ใช้บริการ 5-10 คน</li>
+        <li>ใช้ห้องได้ไม่เกิน 3 ชั่วโมง สามารถขอต่อเวลาได้หากห้องว่าง</li>
+        <li>ให้บริการเฉพาะช่วงเวลาที่กำหนด</li>
+        <li>ห้ามนำอาหารหรือเครื่องดื่มเข้าห้อง</li>
+        <li>โปรดรักษาความสะอาดในห้อง</li>
+        <li>หากไม่ปฏิบัติตามกฎ จะถูกจำกัดสิทธิ์ในการใช้ห้องในครั้งถัดไป</li>
+    </ul>
+
+    <label>วันที่:</label>
+    <input type="date" name="date" required>
+
+    <button type="submit">ส่งฟอร์ม</button>
+</form>
+
+<script>
+    var form = document.getElementById("study-room-form");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) 
+            {
+                form.reset();
+            }
+        })
+        .catch((error) => {
+            console.error("ข้อผิดพลาด:", error);
+        });
+    });
+</script>
+
+
+</body>
+</html>
