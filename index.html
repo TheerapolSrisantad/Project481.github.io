@@ -75,10 +75,13 @@
     <input type="date" name="date" required>
 
     <button type="submit">ส่งฟอร์ม</button>
+
+<div id="form-message" style="display: none; color: green;">ทำการบันทึกข้อมูลแล้ว</div>
 </form>
 
 <script>
     var form = document.getElementById("study-room-form");
+    var messageDiv = document.getElementById("form-message");
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -89,13 +92,17 @@
         })
         .then((response) => response.json())
         .then((data) => {
-            if (data) 
-            {
-                form.reset();
+            if (data) {
+                form.reset(); // รีเซ็ตฟอร์ม
+                messageDiv.style.display = "block"; // แสดงข้อความแจ้ง
+                messageDiv.innerText = "ทำการบันทึกข้อมูลแล้ว"; // ข้อความแจ้งสำเร็จ
             }
         })
         .catch((error) => {
             console.error("ข้อผิดพลาด:", error);
+            messageDiv.style.display = "block";
+            messageDiv.style.color = "red";
+            messageDiv.innerText = "เกิดข้อผิดพลาดในการบันทึกข้อมูล";
         });
     });
 </script>
