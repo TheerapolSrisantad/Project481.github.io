@@ -93,9 +93,9 @@
         .then((response) => response.json())
         .then((data) => {
             if (data) {
-                form.reset(); // รีเซ็ตฟอร์ม
-                messageDiv.style.display = "block"; // แสดงข้อความแจ้ง
-                messageDiv.innerText = "ทำการบันทึกข้อมูลแล้ว"; // ข้อความแจ้งสำเร็จ
+                form.reset();
+                messageDiv.style.display = "block";
+                messageDiv.innerText = "ทำการบันทึกข้อมูลแล้ว";
             }
         })
         .catch((error) => {
